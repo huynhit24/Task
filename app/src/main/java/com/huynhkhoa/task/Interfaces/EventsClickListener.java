@@ -1,6 +1,6 @@
 package com.huynhkhoa.task.Interfaces;
 
-public interface RecyclerViewClickListener {
+public interface EventsClickListener {
     void onItemClick(int position);
 
     void onLongItemClick(int position);

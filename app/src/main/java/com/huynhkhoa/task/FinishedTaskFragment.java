@@ -29,7 +29,7 @@ import com.android.volley.toolbox.Volley;
 import com.huynhkhoa.task.Adapters.FinishedTaskAdapter;
 import com.huynhkhoa.task.Constants.Constants;
 import com.huynhkhoa.task.Services.SharedPreferenceClass;
-import com.huynhkhoa.task.Interfaces.RecyclerViewClickListener;
+import com.huynhkhoa.task.Interfaces.EventsClickListener;
 import com.huynhkhoa.task.Models.TodoModel;
 
 import org.json.JSONArray;
@@ -42,7 +42,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 
-public class FinishedTaskFragment extends Fragment implements RecyclerViewClickListener {
+public class FinishedTaskFragment extends Fragment implements EventsClickListener {
 
     SharedPreferenceClass sharedPreferenceClass;
     String token;

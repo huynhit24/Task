@@ -13,7 +13,7 @@ import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.huynhkhoa.task.R;
-import com.huynhkhoa.task.Interfaces.RecyclerViewClickListener;
+import com.huynhkhoa.task.Interfaces.EventsClickListener;
 import com.huynhkhoa.task.Models.TodoModel;
 
 import java.util.ArrayList;
@@ -23,9 +23,9 @@ public class FinishedTaskAdapter extends RecyclerView.Adapter<FinishedTaskAdapte
     ArrayList<TodoModel> arrayList;
     Context context;
 
-    final private RecyclerViewClickListener clickListener;
+    final private EventsClickListener clickListener;
 
-    public FinishedTaskAdapter(Context context, ArrayList<TodoModel> arrayList, RecyclerViewClickListener clickListener) {
+    public FinishedTaskAdapter(Context context, ArrayList<TodoModel> arrayList, EventsClickListener clickListener) {
         this.arrayList = arrayList;
         this.context = context;
         this.clickListener = clickListener;
