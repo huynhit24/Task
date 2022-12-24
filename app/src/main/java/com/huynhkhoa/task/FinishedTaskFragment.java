@@ -19,7 +19,6 @@ import android.widget.Toast;
 
 import com.android.volley.AuthFailureError;
 import com.android.volley.DefaultRetryPolicy;
-import com.android.volley.NetworkResponse;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
@@ -28,10 +27,9 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 import com.huynhkhoa.task.Adapters.FinishedTaskAdapter;
-import com.huynhkhoa.task.Adapters.TodoListAdapter;
 import com.huynhkhoa.task.Constants.Constants;
 import com.huynhkhoa.task.UtilsService.SharedPreferenceClass;
-import com.huynhkhoa.task.interfaces.RecyclerViewClickListener;
+import com.huynhkhoa.task.Interfaces.RecyclerViewClickListener;
 import com.huynhkhoa.task.model.TodoModel;
 
 import org.json.JSONArray;

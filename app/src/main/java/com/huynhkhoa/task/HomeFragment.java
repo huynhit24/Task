@@ -37,7 +37,7 @@ import com.android.volley.toolbox.Volley;
 import com.huynhkhoa.task.Adapters.TodoListAdapter;
 import com.huynhkhoa.task.Constants.Constants;
 import com.huynhkhoa.task.UtilsService.SharedPreferenceClass;
-import com.huynhkhoa.task.interfaces.RecyclerViewClickListener;
+import com.huynhkhoa.task.Interfaces.RecyclerViewClickListener;
 import com.huynhkhoa.task.model.TodoModel;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 

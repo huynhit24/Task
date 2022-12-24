@@ -1,4 +1,4 @@
-package com.huynhkhoa.task.interfaces;
+package com.huynhkhoa.task.Interfaces;
 
 public interface RecyclerViewClickListener {
     void onItemClick(int position);
