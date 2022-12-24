@@ -5,7 +5,7 @@ import android.content.Context;
 import android.content.SharedPreferences;
 
 public class SharedPreferenceClass {
-    private static final String USER_PREF = "user_todo";
+    private static final String USER_PREF = "user_task";
     private SharedPreferences appShared;
     private SharedPreferences.Editor prefsEditor;
 

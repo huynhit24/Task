@@ -20,7 +20,7 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Welcome Tom Do List App"
+            android:text="Welcome to Task"
             android:textColor="#ffffff"
             android:gravity="center_horizontal"
             android:textSize="20sp"
@@ -45,7 +45,7 @@
             <EditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Enter name..."
+                android:hint="Nhập tên..."
                 android:background="@drawable/input_field"
                 android:textColorHint="#D3CFCF"
                 android:id="@+id/name_ET"
@@ -56,7 +56,7 @@
             <EditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Enter email..."
+                android:hint="Nhập email..."
                 android:background="@drawable/input_field"
                 android:textColorHint="#D3CFCF"
                 android:id="@+id/email_ET"
@@ -68,7 +68,7 @@
             <EditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Enter password..."
+                android:hint="Nhập mật khẩu..."
                 android:background="@drawable/input_field"
                 android:textColorHint="#D3CFCF"
                 android:id="@+id/password_ET"
@@ -99,7 +99,7 @@
             <Button
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Already have an account? Login!!"
+                android:text="Bạn đã có tài khoản? Đăng nhập!!"
                 android:textSize="18sp"
                 android:textAllCaps="false"
                 android:background="@drawable/input_field"

@@ -39,7 +39,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/empty_tv"
-        android:text="You have not finished any task, yet."
+        android:text="Bạn vẫn chưa hoàn thành bất kỳ Task nào."
         android:textSize="30sp"
         android:textStyle="bold"
         android:textColor="@color/red"
