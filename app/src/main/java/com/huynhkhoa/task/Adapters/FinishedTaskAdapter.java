@@ -14,7 +14,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.huynhkhoa.task.R;
 import com.huynhkhoa.task.Interfaces.RecyclerViewClickListener;
-import com.huynhkhoa.task.model.TodoModel;
+import com.huynhkhoa.task.Models.TodoModel;
 
 import java.util.ArrayList;
 import java.util.Random;

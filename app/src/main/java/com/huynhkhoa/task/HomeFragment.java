@@ -38,7 +38,7 @@ import com.huynhkhoa.task.Adapters.TodoListAdapter;
 import com.huynhkhoa.task.Constants.Constants;
 import com.huynhkhoa.task.Services.SharedPreferenceClass;
 import com.huynhkhoa.task.Interfaces.RecyclerViewClickListener;
-import com.huynhkhoa.task.model.TodoModel;
+import com.huynhkhoa.task.Models.TodoModel;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import org.json.JSONArray;

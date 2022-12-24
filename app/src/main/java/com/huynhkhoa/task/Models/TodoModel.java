@@ -1,4 +1,4 @@
-package com.huynhkhoa.task.model;
+package com.huynhkhoa.task.Models;
 
 public class TodoModel {
     private String id, title, description;

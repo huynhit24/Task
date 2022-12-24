@@ -30,7 +30,7 @@ import com.huynhkhoa.task.Adapters.FinishedTaskAdapter;
 import com.huynhkhoa.task.Constants.Constants;
 import com.huynhkhoa.task.Services.SharedPreferenceClass;
 import com.huynhkhoa.task.Interfaces.RecyclerViewClickListener;
-import com.huynhkhoa.task.model.TodoModel;
+import com.huynhkhoa.task.Models.TodoModel;
 
 import org.json.JSONArray;
 import org.json.JSONException;
