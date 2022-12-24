@@ -1,4 +1,4 @@
-package com.huynhkhoa.task.UtilsService;
+package com.huynhkhoa.task.Services;
 
 import android.app.Activity;
 import android.content.Context;

@@ -25,8 +25,8 @@ import com.android.volley.toolbox.HttpHeaderParser;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 import com.huynhkhoa.task.Constants.Constants;
-import com.huynhkhoa.task.UtilsService.SharedPreferenceClass;
-import com.huynhkhoa.task.UtilsService.UtilService;
+import com.huynhkhoa.task.Services.SharedPreferenceClass;
+import com.huynhkhoa.task.Services.UtilService;
 
 import org.json.JSONException;
 import org.json.JSONObject;
