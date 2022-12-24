@@ -15,16 +15,16 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.huynhkhoa.task.R;
 import com.huynhkhoa.task.Interfaces.EventsClickListener;
-import com.huynhkhoa.task.Models.TodoModel;
+import com.huynhkhoa.task.Models.TaskModel;
 
 import java.util.ArrayList;
 import java.util.Random;
 
-public class TodoListAdapter extends RecyclerView.Adapter<TodoListAdapter.MyViewHolder> {
-    ArrayList<TodoModel> arrayList;
+public class TaskListAdapter extends RecyclerView.Adapter<TaskListAdapter.MyViewHolder> {
+    ArrayList<TaskModel> arrayList;
     Context context;
     final private EventsClickListener clickListener;
-    public TodoListAdapter(Context context, ArrayList<TodoModel> arrayList, EventsClickListener clickListener) {
+    public TaskListAdapter(Context context, ArrayList<TaskModel> arrayList, EventsClickListener clickListener) {
         this.arrayList = arrayList;
         this.context = context;
         this.clickListener = clickListener;

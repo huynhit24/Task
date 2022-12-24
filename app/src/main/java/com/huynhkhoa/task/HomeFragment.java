@@ -34,11 +34,11 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.HttpHeaderParser;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
-import com.huynhkhoa.task.Adapters.TodoListAdapter;
+import com.huynhkhoa.task.Adapters.TaskListAdapter;
 import com.huynhkhoa.task.Constants.Constants;
 import com.huynhkhoa.task.Services.SharedPreferenceClass;
 import com.huynhkhoa.task.Interfaces.EventsClickListener;
-import com.huynhkhoa.task.Models.TodoModel;
+import com.huynhkhoa.task.Models.TaskModel;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import org.json.JSONArray;
@@ -54,11 +54,11 @@ public class HomeFragment extends Fragment implements EventsClickListener {
     FloatingActionButton floatingActionButton;
     SharedPreferenceClass sharedPreferenceClass;
     String token;
-    TodoListAdapter todoListAdapter;
+    TaskListAdapter taskListAdapter;
     RecyclerView recyclerView;
     TextView empty_tv;
     ProgressBar progressBar;
-    ArrayList<TodoModel> arrayList;
+    ArrayList<TaskModel> arrayList;
 
     public HomeFragment() {
     }
@@ -265,7 +265,7 @@ public class HomeFragment extends Fragment implements EventsClickListener {
                             for(int i = 0; i < jsonArray.length(); i ++) {
                                 JSONObject jsonObject = jsonArray.getJSONObject(i);
 
-                                TodoModel todoModel = new TodoModel(
+                                TaskModel todoModel = new TaskModel(
                                         jsonObject.getString("_id"),
                                         jsonObject.getString("title"),
                                         jsonObject.getString("description")
@@ -273,8 +273,8 @@ public class HomeFragment extends Fragment implements EventsClickListener {
                                 arrayList.add(todoModel);
                             }
 
-                            todoListAdapter = new TodoListAdapter(getActivity(), arrayList, HomeFragment.this);
-                            recyclerView.setAdapter(todoListAdapter);
+                            taskListAdapter = new TaskListAdapter(getActivity(), arrayList, HomeFragment.this);
+                            recyclerView.setAdapter(taskListAdapter);
                         }
 
                     }
@@ -353,7 +353,7 @@ public class HomeFragment extends Fragment implements EventsClickListener {
                     if(response.getBoolean("success")) {
                         Toast.makeText(getActivity(), response.getString("msg"), Toast.LENGTH_SHORT).show();
                         arrayList.remove(position);
-                        todoListAdapter.notifyItemRemoved(position);
+                        taskListAdapter.notifyItemRemoved(position);
                     }
                 } catch (JSONException e) {
                     e.printStackTrace();
@@ -482,7 +482,7 @@ public class HomeFragment extends Fragment implements EventsClickListener {
                                 arrayList.remove(position);
                                 getTasks();
 
-                                todoListAdapter.notifyItemRemoved(position);
+                                taskListAdapter.notifyItemRemoved(position);
                                 Toast.makeText(getActivity(), response.getString("msg"), Toast.LENGTH_SHORT).show();
                             }
                         } catch (JSONException e) {

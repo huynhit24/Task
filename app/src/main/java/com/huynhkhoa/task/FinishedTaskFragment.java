@@ -30,7 +30,7 @@ import com.huynhkhoa.task.Adapters.FinishedTaskAdapter;
 import com.huynhkhoa.task.Constants.Constants;
 import com.huynhkhoa.task.Services.SharedPreferenceClass;
 import com.huynhkhoa.task.Interfaces.EventsClickListener;
-import com.huynhkhoa.task.Models.TodoModel;
+import com.huynhkhoa.task.Models.TaskModel;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -50,7 +50,7 @@ public class FinishedTaskFragment extends Fragment implements EventsClickListene
     RecyclerView recyclerView;
     TextView empty_tv;
     ProgressBar progressBar;
-    ArrayList<TodoModel> arrayList;
+    ArrayList<TaskModel> arrayList;
 
     public FinishedTaskFragment() {
     }
@@ -98,7 +98,7 @@ public class FinishedTaskFragment extends Fragment implements EventsClickListene
                             for(int i = 0; i < jsonArray.length(); i ++) {
                                 JSONObject jsonObject = jsonArray.getJSONObject(i);
 
-                                TodoModel todoModel = new TodoModel(
+                                TaskModel todoModel = new TaskModel(
                                         jsonObject.getString("_id"),
                                         jsonObject.getString("title"),
                                         jsonObject.getString("description")

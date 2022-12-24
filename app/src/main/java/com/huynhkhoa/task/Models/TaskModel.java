@@ -1,8 +1,8 @@
 package com.huynhkhoa.task.Models;
 
-public class TodoModel {
+public class TaskModel {
     private String id, title, description;
-    public TodoModel(String id, String title, String description) {
+    public TaskModel(String id, String title, String description) {
         this.id = id;
         this.title = title;
         this.description = description;
