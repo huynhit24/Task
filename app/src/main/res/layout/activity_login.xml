@@ -7,7 +7,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/colorPrimaryDark"
+        android:background="@color/white"
         android:orientation="vertical"
         >
         <ImageView
@@ -47,7 +47,7 @@
                 android:layout_height="wrap_content"
                 android:hint="Nhập email..."
                 android:background="@drawable/input_field"
-                android:textColorHint="#D3CFCF"
+                android:textColorHint="#ffffff"
                 android:id="@+id/email_ET"
                 android:singleLine="true"
                 android:inputType="text"
@@ -59,7 +59,7 @@
                 android:layout_height="wrap_content"
                 android:hint="Nhập mật khẩu..."
                 android:background="@drawable/input_field"
-                android:textColorHint="#D3CFCF"
+                android:textColorHint="#ffffff"
                 android:id="@+id/password_ET"
                 android:layout_marginTop="20dp"
                 android:singleLine="true"
@@ -70,7 +70,7 @@
             <Button
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Login"
+                android:text="Đăng nhập"
                 android:textAllCaps="false"
                 android:textSize="18sp"
                 android:id="@+id/loginBtn"
@@ -88,7 +88,7 @@
             <Button
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Create an account"
+                android:text="Tạo tài khoản mới"
                 android:textSize="18sp"
                 android:textAllCaps="false"
                 android:background="@drawable/input_field"

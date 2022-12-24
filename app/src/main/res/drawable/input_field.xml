@@ -6,7 +6,7 @@
         android:radius="5dp"
         />
     <solid
-        android:color="@color/shade_black"
+        android:color="@color/darkblue"
         />
     <padding
         android:top="10dp"
