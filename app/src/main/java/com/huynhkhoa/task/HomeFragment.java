@@ -221,7 +221,7 @@ public class HomeFragment extends Fragment implements EventsClickListener {
                 button.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        deleteTodo(id, position);
+                        deleteTask(id, position);
                         alertDialog.dismiss();
                     }
                 });
@@ -249,7 +249,7 @@ public class HomeFragment extends Fragment implements EventsClickListener {
                 button.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        updateToFinishTodo(id, position);
+                        updateToFinishTask(id, position);
                         alertDialog.dismiss();
                     }
                 });
@@ -273,7 +273,7 @@ public class HomeFragment extends Fragment implements EventsClickListener {
             public void onResponse(JSONObject response) {
                 try {
                     if(response.getBoolean("success")) {
-                        JSONArray jsonArray = response.getJSONArray("todos");
+                        JSONArray jsonArray = response.getJSONArray("tasks");
 
                         if(jsonArray.length() == 0) {
                             empty_tv.setVisibility(View.VISIBLE);
@@ -282,12 +282,12 @@ public class HomeFragment extends Fragment implements EventsClickListener {
                             for(int i = 0; i < jsonArray.length(); i ++) {
                                 JSONObject jsonObject = jsonArray.getJSONObject(i);
 
-                                TaskModel todoModel = new TaskModel(
+                                TaskModel taskModel = new TaskModel(
                                         jsonObject.getString("_id"),
                                         jsonObject.getString("title"),
                                         jsonObject.getString("description")
                                 );
-                                arrayList.add(todoModel);
+                                arrayList.add(taskModel);
                             }
 
                             taskListAdapter = new TaskListAdapter(getActivity(), arrayList, HomeFragment.this);
@@ -362,7 +362,7 @@ public class HomeFragment extends Fragment implements EventsClickListener {
      * Xóa 1 Task theo Id
      * Gọi API Delete xóa Task
      * */
-    private void deleteTodo(final String id, final  int position) {
+    private void deleteTask(final String id, final  int position) {
         String url = Constants.BASE_URL + "/api/task/"+id;
 
         JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.DELETE, url, null
@@ -500,7 +500,7 @@ public class HomeFragment extends Fragment implements EventsClickListener {
      * Cập nhật trạng thái của 1 Task là hoàn thành
      * Gọi API Get để thay đổi field finished thành true
      * */
-    private void updateToFinishTodo(String id,final int position) {
+    private void updateToFinishTask(String id,final int position) {
         String url = Constants.BASE_URL + "/api/task/"+id;
         HashMap<String, String> body = new HashMap<>();
         body.put("finished", "true");

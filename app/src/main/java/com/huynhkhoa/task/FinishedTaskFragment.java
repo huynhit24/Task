@@ -46,7 +46,7 @@ public class FinishedTaskFragment extends Fragment implements EventsClickListene
 
     SharedPreferenceClass sharedPreferenceClass;
     String token;
-    FinishedTaskAdapter todoListAdapter;
+    FinishedTaskAdapter taskListAdapter;
     RecyclerView recyclerView;
     TextView empty_tv;
     ProgressBar progressBar;
@@ -92,7 +92,7 @@ public class FinishedTaskFragment extends Fragment implements EventsClickListene
             public void onResponse(JSONObject response) {
                 try {
                     if(response.getBoolean("success")) {
-                        JSONArray jsonArray = response.getJSONArray("todos");
+                        JSONArray jsonArray = response.getJSONArray("tasks");
 
                         if(jsonArray.length() == 0) {
                             empty_tv.setVisibility(View.VISIBLE);
@@ -101,16 +101,16 @@ public class FinishedTaskFragment extends Fragment implements EventsClickListene
                             for(int i = 0; i < jsonArray.length(); i ++) {
                                 JSONObject jsonObject = jsonArray.getJSONObject(i);
 
-                                TaskModel todoModel = new TaskModel(
+                                TaskModel taskModel = new TaskModel(
                                         jsonObject.getString("_id"),
                                         jsonObject.getString("title"),
                                         jsonObject.getString("description")
                                 );
-                                arrayList.add(todoModel);
+                                arrayList.add(taskModel);
                             }
 
-                            todoListAdapter = new FinishedTaskAdapter(getActivity(), arrayList, FinishedTaskFragment.this);
-                            recyclerView.setAdapter(todoListAdapter);
+                            taskListAdapter = new FinishedTaskAdapter(getActivity(), arrayList, FinishedTaskFragment.this);
+                            recyclerView.setAdapter(taskListAdapter);
                         }
 
                     }
@@ -189,7 +189,7 @@ public class FinishedTaskFragment extends Fragment implements EventsClickListene
                     if(response.getBoolean("success")) {
                         Toast.makeText(getActivity(), response.getString("msg"), Toast.LENGTH_SHORT).show();
                         arrayList.remove(position);
-                        todoListAdapter.notifyItemRemoved(position);
+                        taskListAdapter.notifyItemRemoved(position);
                     }
                 } catch (JSONException e) {
                     e.printStackTrace();

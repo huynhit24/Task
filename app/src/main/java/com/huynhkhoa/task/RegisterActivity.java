@@ -175,8 +175,8 @@ public class RegisterActivity extends AppCompatActivity {
     @Override
     protected void onStart() {
         super.onStart();
-        SharedPreferences todo_pref = getSharedPreferences("user_task", MODE_PRIVATE);
-        if(todo_pref.contains("token")) {
+        SharedPreferences task_pref = getSharedPreferences("user_task", MODE_PRIVATE);
+        if(task_pref.contains("token")) {
             startActivity(new Intent(RegisterActivity.this, MainActivity.class));
             finish();
         }
