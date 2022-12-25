@@ -5,15 +5,15 @@
         android:checkableBehavior="single"
         >
         <item
-            android:title="Home"
+            android:title="Trang chủ"
             android:id="@+id/action_home"
             />
         <item
-            android:title="Finished Task"
+            android:title="Tasks đã xong"
             android:id="@+id/action_finished_task"
             />
         <item
-            android:title="Logout"
+            android:title="Đăng xuất"
             android:id="@+id/action_logout"
             />
     </group>
