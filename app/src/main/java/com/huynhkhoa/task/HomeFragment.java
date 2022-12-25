@@ -126,8 +126,8 @@ public class HomeFragment extends Fragment implements EventsClickListener {
         final AlertDialog dialog = new AlertDialog.Builder(getActivity())
                 .setView(alertLayout)
                 .setTitle("Add Task")
-                .setPositiveButton("Add", null)
-                .setNegativeButton("Cancel", null)
+                .setPositiveButton("Thêm", null)
+                .setNegativeButton("Hủy bỏ", null)
                 .create();
 
         dialog.setOnShowListener(new DialogInterface.OnShowListener() {
@@ -144,7 +144,7 @@ public class HomeFragment extends Fragment implements EventsClickListener {
                             addTask(title, description);
                             dialog.dismiss();
                         } else {
-                            Toast.makeText(getActivity(), "Please enter title...", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(getActivity(), "Nhập tiêu đề Task ...", Toast.LENGTH_SHORT).show();
                         }
                     }
                 });
@@ -166,8 +166,8 @@ public class HomeFragment extends Fragment implements EventsClickListener {
         final AlertDialog alertDialog = new AlertDialog.Builder(getActivity())
                 .setView(alertLayout)
                 .setTitle("Update Task")
-                .setPositiveButton("Update", null)
-                .setNegativeButton("Cancel", null)
+                .setPositiveButton("Cập nhật", null)
+                .setNegativeButton("Hủy bỏ", null)
                 .create();
 
         alertDialog.setOnShowListener(new DialogInterface.OnShowListener() {
@@ -192,8 +192,8 @@ public class HomeFragment extends Fragment implements EventsClickListener {
     public void showDeleteDialog(final String id, final  int position) {
         final AlertDialog alertDialog = new AlertDialog.Builder(getActivity())
                 .setTitle("Are you want to delete the task ?")
-                .setPositiveButton("Yes", null)
-                .setNegativeButton("No", new DialogInterface.OnClickListener() {
+                .setPositiveButton("Có", null)
+                .setNegativeButton("Không", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         getTasks();
@@ -219,9 +219,9 @@ public class HomeFragment extends Fragment implements EventsClickListener {
     }
     public void showFinishedTaskDialog(final String id, final int position) {
         final AlertDialog alertDialog = new AlertDialog.Builder(getActivity())
-                .setTitle("Move to finished task?")
-                .setPositiveButton("Yes", null)
-                .setNegativeButton("No", null)
+                .setTitle("Đánh dấu Task này đã hoàn thành?")
+                .setPositiveButton("Có", null)
+                .setNegativeButton("Không", null)
                 .create();
 
         alertDialog.setOnShowListener(new DialogInterface.OnShowListener() {
@@ -385,7 +385,7 @@ public class HomeFragment extends Fragment implements EventsClickListener {
             public void onResponse(JSONObject response) {
                 try {
                     if(response.getBoolean("success")) {
-                        Toast.makeText(getActivity(), "Added Successfully", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getActivity(), "Thêm Task thành công!", Toast.LENGTH_SHORT).show();
                         getTasks();
                     }
                 } catch (JSONException e) {

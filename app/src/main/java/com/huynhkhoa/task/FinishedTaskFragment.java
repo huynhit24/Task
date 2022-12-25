@@ -207,8 +207,8 @@ public class FinishedTaskFragment extends Fragment implements EventsClickListene
     public void showDeleteDialog(final String id, final int position) {
         final AlertDialog dialog = new AlertDialog.Builder(getActivity())
                 .setTitle("Delete Task..")
-                .setPositiveButton("Delete", null)
-                .setNegativeButton("Cancel", null)
+                .setPositiveButton("Xóa", null)
+                .setNegativeButton("Hủy bỏ", null)
                 .create();
 
 

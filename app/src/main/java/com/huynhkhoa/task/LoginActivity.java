@@ -154,11 +154,11 @@ public class LoginActivity extends AppCompatActivity {
                 if(!TextUtils.isEmpty(password)) {
                     isValid = true;
                 } else {
-                    utilService.showSnackBar(view,"please enter password....");
+                    utilService.showSnackBar(view,"Vui lòng nhập mật khẩu ....");
                     isValid = false;
                 }
             } else {
-                utilService.showSnackBar(view,"please enter email....");
+                utilService.showSnackBar(view,"Vui lòng nhập email ....");
                 isValid = false;
             }
 

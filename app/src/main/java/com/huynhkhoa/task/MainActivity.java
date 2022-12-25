@@ -193,10 +193,10 @@ public class MainActivity extends AppCompatActivity {
                 Intent sharingIntent = new Intent(Intent.ACTION_SEND);
                 sharingIntent.setType("text/plain");
 
-                String shareBody = "Hey try this to do app, it uses permanent saving of your task.";
+                String shareBody = "Hãy thử ứng dụng này để làm, nó sử dụng tính năng lưu vĩnh viễn nhiệm vụ của bạn.";
 
                 sharingIntent.putExtra(Intent.EXTRA_TEXT, shareBody);
-                startActivity(Intent.createChooser(sharingIntent, "Share Via"));
+                startActivity(Intent.createChooser(sharingIntent, "Chia sẻ qua"));
 
                 return true;
 
