@@ -85,7 +85,7 @@ public class MainActivity extends AppCompatActivity {
      * Lấy thông tin User qua API Get User
      * */
     private void getUserProfile() {
-        String url = Constants.BASE_URL + "/api/todo/auth";
+        String url = Constants.BASE_URL + "/api/task/auth";
         final String token = sharedPreferenceClass.getValue_string("token");
 
         JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, url, null, new Response.Listener<JSONObject>() {

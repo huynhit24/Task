@@ -92,7 +92,7 @@ public class LoginActivity extends AppCompatActivity {
         params.put("email", email);
         params.put("password", password);
 
-        String apiKey = Constants.BASE_URL + "/api/todo/auth/login";
+        String apiKey = Constants.BASE_URL + "/api/task/auth/login";
 
         JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.POST,
                 apiKey, new JSONObject(params), new Response.Listener<JSONObject>() {

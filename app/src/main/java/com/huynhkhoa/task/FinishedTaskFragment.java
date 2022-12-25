@@ -84,7 +84,7 @@ public class FinishedTaskFragment extends Fragment implements EventsClickListene
     private void getTasks() {
         arrayList = new ArrayList<>();
         progressBar.setVisibility(View.VISIBLE);
-        String url = Constants.BASE_URL + "/api/todo/finished";
+        String url = Constants.BASE_URL + "/api/task/finished";
 
         JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET,
                 url, null, new Response.Listener<JSONObject>() {
@@ -179,7 +179,7 @@ public class FinishedTaskFragment extends Fragment implements EventsClickListene
      * Xóa Task theo Id
      * */
     public void deleteTask(final String id, final int position) {
-        String url = Constants.BASE_URL + "/api/todo/"+id;
+        String url = Constants.BASE_URL + "/api/task/"+id;
 
         JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.DELETE, url, null
                 , new Response.Listener<JSONObject>() {

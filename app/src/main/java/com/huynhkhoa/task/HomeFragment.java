@@ -265,7 +265,7 @@ public class HomeFragment extends Fragment implements EventsClickListener {
     public void getTasks() {
         arrayList = new ArrayList<>();
         progressBar.setVisibility(View.VISIBLE);
-        String url = Constants.BASE_URL + "/api/todo";
+        String url = Constants.BASE_URL + "/api/task";
 
         JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET,
                 url, null, new Response.Listener<JSONObject>() {
@@ -363,7 +363,7 @@ public class HomeFragment extends Fragment implements EventsClickListener {
      * Gọi API Delete xóa Task
      * */
     private void deleteTodo(final String id, final  int position) {
-        String url = Constants.BASE_URL + "/api/todo/"+id;
+        String url = Constants.BASE_URL + "/api/task/"+id;
 
         JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.DELETE, url, null
                 , new Response.Listener<JSONObject>() {
@@ -397,7 +397,7 @@ public class HomeFragment extends Fragment implements EventsClickListener {
      * Gọi API Post để thêm Task
      * */
     private void addTask(String title, String description) {
-        String url = Constants.BASE_URL + "/api/todo";
+        String url = Constants.BASE_URL + "/api/task";
 
         HashMap<String, String> body = new HashMap<>();
         body.put("title", title);
@@ -457,7 +457,7 @@ public class HomeFragment extends Fragment implements EventsClickListener {
      * Gọi API Put để cập nhật Task
      * */
     private  void  updateTask(String id, String title, String description) {
-        String url = Constants.BASE_URL + "/api/todo/"+id;
+        String url = Constants.BASE_URL + "/api/task/"+id;
         HashMap<String, String> body = new HashMap<>();
         body.put("title", title);
         body.put("description", description);
@@ -501,7 +501,7 @@ public class HomeFragment extends Fragment implements EventsClickListener {
      * Gọi API Get để thay đổi field finished thành true
      * */
     private void updateToFinishTodo(String id,final int position) {
-        String url = Constants.BASE_URL + "/api/todo/"+id;
+        String url = Constants.BASE_URL + "/api/task/"+id;
         HashMap<String, String> body = new HashMap<>();
         body.put("finished", "true");
 

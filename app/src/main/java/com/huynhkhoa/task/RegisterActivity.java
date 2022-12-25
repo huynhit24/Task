@@ -87,7 +87,7 @@ public class RegisterActivity extends AppCompatActivity {
         params.put("email", email);
         params.put("password", password);
 
-        String apiKey = Constants.BASE_URL + "/api/todo/auth/register";
+        String apiKey = Constants.BASE_URL + "/api/task/auth/register";
 
         JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.POST,
                 apiKey, new JSONObject(params), new Response.Listener<JSONObject>() {
