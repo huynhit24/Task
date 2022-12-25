@@ -115,7 +115,10 @@ public class HomeFragment extends Fragment implements EventsClickListener {
         }
     };
 
-
+    /**
+     * Show hộp thoại thêm 1 Task mới vào danh sách
+     * Có chức năng hùy bỏ hộp thoại
+     * */
     public void showAlertDialog() {
         LayoutInflater inflater = getLayoutInflater();
         View alertLayout = inflater.inflate(R.layout.custom_dialog_layout, null);
@@ -125,7 +128,7 @@ public class HomeFragment extends Fragment implements EventsClickListener {
 
         final AlertDialog dialog = new AlertDialog.Builder(getActivity())
                 .setView(alertLayout)
-                .setTitle("Add Task")
+                .setTitle("Thêm Task")
                 .setPositiveButton("Thêm", null)
                 .setNegativeButton("Hủy bỏ", null)
                 .create();
@@ -153,6 +156,11 @@ public class HomeFragment extends Fragment implements EventsClickListener {
 
         dialog.show();
     }
+
+    /**
+     * Show hộp thoại cập nhật Task theo Task được chọn qua ID cho trong danh sách
+     * Có chức năng tắt hộp thoại cập nhật
+     * */
     public void showUpdateDialog(final  String  id, String title, String description)  {
         LayoutInflater inflater = getLayoutInflater();
         View alertLayout = inflater.inflate(R.layout.custom_dialog_layout, null);
@@ -165,7 +173,7 @@ public class HomeFragment extends Fragment implements EventsClickListener {
 
         final AlertDialog alertDialog = new AlertDialog.Builder(getActivity())
                 .setView(alertLayout)
-                .setTitle("Update Task")
+                .setTitle("Cập nhật Task")
                 .setPositiveButton("Cập nhật", null)
                 .setNegativeButton("Hủy bỏ", null)
                 .create();
@@ -189,9 +197,14 @@ public class HomeFragment extends Fragment implements EventsClickListener {
 
         alertDialog.show();
     }
+
+    /**
+     * Show hộp thoại xóa 1 Task có trong dánh sách theo ID được chọn
+     * Có chức năng hủy xóa
+     * */
     public void showDeleteDialog(final String id, final  int position) {
         final AlertDialog alertDialog = new AlertDialog.Builder(getActivity())
-                .setTitle("Are you want to delete the task ?")
+                .setTitle("Bạn có muốn xóa Task này ?")
                 .setPositiveButton("Có", null)
                 .setNegativeButton("Không", new DialogInterface.OnClickListener() {
                     @Override
@@ -217,6 +230,11 @@ public class HomeFragment extends Fragment implements EventsClickListener {
 
         alertDialog.show();
     }
+
+    /**
+     * Show hộp thoại đánh dấu 1 Task là đã hoàn thành
+     * Có chức năng tắt hộp thoại
+     * */
     public void showFinishedTaskDialog(final String id, final int position) {
         final AlertDialog alertDialog = new AlertDialog.Builder(getActivity())
                 .setTitle("Đánh dấu Task này đã hoàn thành?")
@@ -241,10 +259,9 @@ public class HomeFragment extends Fragment implements EventsClickListener {
         alertDialog.show();
     }
 
-
-
-
-    // Get all Todo Task methood
+    /**
+     * Lấy ra tất cả danh sách Tasks có trong database
+     * */
     public void getTasks() {
         arrayList = new ArrayList<>();
         progressBar.setVisibility(View.VISIBLE);
@@ -341,7 +358,10 @@ public class HomeFragment extends Fragment implements EventsClickListener {
 
 
 
-    // Delete Todo Method
+    /**
+     * Xóa 1 Task theo Id
+     * Gọi API Delete xóa Task
+     * */
     private void deleteTodo(final String id, final  int position) {
         String url = Constants.BASE_URL + "/api/todo/"+id;
 
@@ -371,7 +391,11 @@ public class HomeFragment extends Fragment implements EventsClickListener {
         RequestQueue requestQueue = Volley.newRequestQueue(getContext());
         requestQueue.add(jsonObjectRequest);
     }
-    // Add Todo Task Method
+
+    /**
+     * Thêm 1 Task mới vào danh sách
+     * Gọi API Post để thêm Task
+     * */
     private void addTask(String title, String description) {
         String url = Constants.BASE_URL + "/api/todo";
 
@@ -427,7 +451,11 @@ public class HomeFragment extends Fragment implements EventsClickListener {
         RequestQueue requestQueue = Volley.newRequestQueue(getContext());
         requestQueue.add(jsonObjectRequest);
     }
-    // Update Todo Task Method
+
+    /**
+     * Cập nhật 1 Task theo Id
+     * Gọi API Put để cập nhật Task
+     * */
     private  void  updateTask(String id, String title, String description) {
         String url = Constants.BASE_URL + "/api/todo/"+id;
         HashMap<String, String> body = new HashMap<>();
@@ -467,7 +495,11 @@ public class HomeFragment extends Fragment implements EventsClickListener {
         RequestQueue requestQueue = Volley.newRequestQueue(getContext());
         requestQueue.add(jsonObjectRequest);
     }
-    // Update to finished task
+
+    /**
+     * Cập nhật trạng thái của 1 Task là hoàn thành
+     * Gọi API Get để thay đổi field finished thành true
+     * */
     private void updateToFinishTodo(String id,final int position) {
         String url = Constants.BASE_URL + "/api/todo/"+id;
         HashMap<String, String> body = new HashMap<>();

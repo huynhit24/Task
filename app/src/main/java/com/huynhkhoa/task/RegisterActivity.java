@@ -144,7 +144,11 @@ public class RegisterActivity extends AppCompatActivity {
         requestQueue.add(jsonObjectRequest);
     }
 
-
+    /**
+     * Hàm kiểm tra thông tin đăng ký User có hợp lệ hay không?
+     * Nếu hợp lệ trả về true
+     * Nếu không hợp lệ trả về false và thông báo nhập lại
+     * */
     public boolean validate(View view) {
         boolean isValid;
 

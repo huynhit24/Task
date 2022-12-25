@@ -78,6 +78,9 @@ public class FinishedTaskFragment extends Fragment implements EventsClickListene
         return view;
     }
 
+    /**
+     * Lấy ra tất cả danh sách Task đã đánh dấu là hoàn thành
+     * */
     private void getTasks() {
         arrayList = new ArrayList<>();
         progressBar.setVisibility(View.VISIBLE);
@@ -172,7 +175,9 @@ public class FinishedTaskFragment extends Fragment implements EventsClickListene
         requestQueue.add(jsonObjectRequest);
     }
 
-
+    /**
+     * Xóa Task theo Id
+     * */
     public void deleteTask(final String id, final int position) {
         String url = Constants.BASE_URL + "/api/todo/"+id;
 
@@ -203,7 +208,9 @@ public class FinishedTaskFragment extends Fragment implements EventsClickListene
         requestQueue.add(jsonObjectRequest);
     }
 
-
+    /**
+     * Show hộp thoại xóa Task theo Id
+     * */
     public void showDeleteDialog(final String id, final int position) {
         final AlertDialog dialog = new AlertDialog.Builder(getActivity())
                 .setTitle("Delete Task..")

@@ -82,6 +82,9 @@ public class LoginActivity extends AppCompatActivity {
         });
     }
 
+    /**
+     * Hàm gọi API login user, nhận 2 đầu vào là email và password
+     * */
     private void loginUser(View view) {
         progressBar.setVisibility(View.VISIBLE);
 
@@ -147,6 +150,11 @@ public class LoginActivity extends AppCompatActivity {
         requestQueue.add(jsonObjectRequest);
     }
 
+    /**
+     * Hàm kiểm tra dữ liệu đăng nhập của user có hợp lệ hay không?
+     * Nếu hợp lệ trả về true
+     * Nêu không hợp lệ trả về false và thông báo nhập lại
+     * */
     private boolean validate(View view) {
         boolean isValid;
 

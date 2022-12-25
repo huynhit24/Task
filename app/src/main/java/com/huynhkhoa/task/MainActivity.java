@@ -81,6 +81,9 @@ public class MainActivity extends AppCompatActivity {
         getUserProfile();
     }
 
+    /**
+     * Lấy thông tin User qua API Get User
+     * */
     private void getUserProfile() {
         String url = Constants.BASE_URL + "/api/todo/auth";
         final String token = sharedPreferenceClass.getValue_string("token");
