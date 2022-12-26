@@ -11,7 +11,7 @@
         android:id="@+id/recycler_view"
         android:layout_marginTop="5dp"
         android:layout_alignParentTop="true"
-
+        android:scrollbars="vertical"
         />
 
     <ProgressBar
@@ -23,6 +23,7 @@
         android:visibility="gone"
         />
 
+    <!-- Hiển thị dòng "Danh sách Task trống!!!" nếu có 1 Task nào -->
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

@@ -285,7 +285,8 @@ public class HomeFragment extends Fragment implements RecyclerViewClickListener 
                                 TaskModel taskModel = new TaskModel(
                                         jsonObject.getString("_id"),
                                         jsonObject.getString("title"),
-                                        jsonObject.getString("description")
+                                        jsonObject.getString("description"),
+                                        jsonObject.getString("duedateAt")
                                 );
                                 arrayList.add(taskModel);
                             }

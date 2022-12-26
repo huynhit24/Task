@@ -22,17 +22,17 @@ public class TaskModel {
         return description;
     }
 
-    private Date createdAt;
+    private String createdAt;
 
-    private Date duedateAt;
+    private String duedateAt;
 
     private String priority;
 
     private Boolean finished;
 
-    public Date getCreatedAt() { return createdAt; }
+    public String getCreatedAt() { return createdAt; }
 
-    public Date getDuedateAt() { return duedateAt; }
+    public String getDuedateAt() { return duedateAt; }
 
     public String getPriority() { return priority; }
 
@@ -44,7 +44,14 @@ public class TaskModel {
         this.description = description;
     }
 
-    public TaskModel(String id, String title, String description, Date createdAt, Date duedateAt, String priority, Boolean finished) {
+    public TaskModel(String id, String title, String description, String duedateAt) {
+        this.id = id;
+        this.title = title;
+        this.description = description;
+        this.duedateAt = duedateAt;
+    }
+
+    public TaskModel(String id, String title, String description, String createdAt, String duedateAt, String priority, Boolean finished) {
         this.id = id;
         this.title = title;
         this.description = description;

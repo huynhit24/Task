@@ -60,10 +60,12 @@ public class TaskListAdapter extends RecyclerView.Adapter<TaskListAdapter.MyView
         final String title = arrayList.get(position).getTitle();
         final String description = arrayList.get(position).getDescription();
         final String id = arrayList.get(position).getId();
+        final String duedateAt = arrayList.get(position).getDuedateAt();
 
         holder.titleTv.setText(title);
         if(!description.equals("")) {
             holder.descriptionTv.setText(description);
+            holder.duedateAtTv.setText(duedateAt);
         }
 
     }
@@ -76,7 +78,7 @@ public class TaskListAdapter extends RecyclerView.Adapter<TaskListAdapter.MyView
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
         CardView accordian_title;
-        TextView titleTv, descriptionTv;
+        TextView titleTv, descriptionTv, duedateAtTv;
         RelativeLayout accordian_body;
         ImageView arrow, editBtn, deleteBtn, doneBtn;
         public MyViewHolder(@NonNull View itemView) {
@@ -84,6 +86,7 @@ public class TaskListAdapter extends RecyclerView.Adapter<TaskListAdapter.MyView
 
             titleTv = (TextView) itemView.findViewById(R.id.task_title);
             descriptionTv = (TextView) itemView.findViewById(R.id.task_description);
+            duedateAtTv = (TextView) itemView.findViewById(R.id.task_duedateAt);
             accordian_title = (CardView) itemView.findViewById(R.id.accordian_title);
             accordian_body = (RelativeLayout) itemView.findViewById(R.id.accordian_body);
             arrow = (ImageView) itemView.findViewById(R.id.arrow);
