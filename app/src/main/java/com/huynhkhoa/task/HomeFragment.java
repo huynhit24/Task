@@ -37,7 +37,7 @@ import com.android.volley.toolbox.Volley;
 import com.huynhkhoa.task.Adapters.TaskListAdapter;
 import com.huynhkhoa.task.Constants.Constants;
 import com.huynhkhoa.task.Services.SharedPreferenceClass;
-import com.huynhkhoa.task.Interfaces.EventsClickListener;
+import com.huynhkhoa.task.Interfaces.RecyclerViewClickListener;
 import com.huynhkhoa.task.Models.TaskModel;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
@@ -50,7 +50,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
-public class HomeFragment extends Fragment implements EventsClickListener {
+public class HomeFragment extends Fragment implements RecyclerViewClickListener {
     FloatingActionButton floatingActionButton;
     SharedPreferenceClass sharedPreferenceClass;
     String token;

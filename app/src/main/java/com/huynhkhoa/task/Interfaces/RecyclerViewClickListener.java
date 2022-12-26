@@ -1,6 +1,6 @@
 package com.huynhkhoa.task.Interfaces;
 
-public interface EventsClickListener {
+public interface RecyclerViewClickListener {
     /**
      * Khai báo các event Click sẽ được triển khai sử dụng
      * */

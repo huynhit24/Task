@@ -14,7 +14,7 @@ import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.huynhkhoa.task.R;
-import com.huynhkhoa.task.Interfaces.EventsClickListener;
+import com.huynhkhoa.task.Interfaces.RecyclerViewClickListener;
 import com.huynhkhoa.task.Models.TaskModel;
 
 import java.util.ArrayList;
@@ -23,8 +23,8 @@ import java.util.Random;
 public class TaskListAdapter extends RecyclerView.Adapter<TaskListAdapter.MyViewHolder> {
     ArrayList<TaskModel> arrayList;
     Context context;
-    final private EventsClickListener clickListener;
-    public TaskListAdapter(Context context, ArrayList<TaskModel> arrayList, EventsClickListener clickListener) {
+    final private RecyclerViewClickListener clickListener;
+    public TaskListAdapter(Context context, ArrayList<TaskModel> arrayList, RecyclerViewClickListener clickListener) {
         this.arrayList = arrayList;
         this.context = context;
         this.clickListener = clickListener;
