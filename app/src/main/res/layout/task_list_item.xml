@@ -1,12 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    app:cardUseCompatPadding="true"
-    app:cardCornerRadius="5dp"
-    android:layout_margin="3dp"
     android:id="@+id/accordian_title"
-    android:layout_height="wrap_content">
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="3dp"
+    app:cardCornerRadius="20px"
+    app:cardUseCompatPadding="true"
+    app:cardBackgroundColor="@android:color/transparent"
+    >
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -18,10 +20,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
-            android:src="@drawable/ic_arrow"
             android:layout_centerVertical="true"
             android:layout_marginRight="20dp"
-            />
+            android:src="@drawable/ic_arrow" />
 
         <ImageView
             android:id="@+id/icon_item"
@@ -55,84 +56,82 @@
 
 
     </RelativeLayout>
+
     <RelativeLayout
-        android:visibility="gone"
+        android:id="@+id/accordian_body"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/accordian_body"
-        android:padding="5dp"
         android:layout_gravity="bottom"
-        android:layout_marginTop="50dp">
-<!--        <RelativeLayout-->
-<!--            android:visibility="gone"-->
-<!--            android:layout_width="match_parent"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:padding="5dp"-->
-<!--            android:layout_gravity="bottom"-->
-<!--            android:layout_marginTop="50dp"-->
-<!--            >-->
-            <!-- Hiển thị ngày hết hạn -->
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:id="@+id/task_duedateAt"
-                android:textColor="#fff"
-                android:text="Ngày hết han"
-                android:layout_marginLeft="25dp"
-                android:layout_marginRight="10dp"
-                android:layout_marginTop="30dp"
-                />
-<!--        </RelativeLayout>-->
+        android:layout_marginTop="50dp"
+        android:padding="5dp"
+        android:visibility="gone">
+        <!--        <RelativeLayout-->
+        <!--            android:visibility="gone"-->
+        <!--            android:layout_width="match_parent"-->
+        <!--            android:layout_height="wrap_content"-->
+        <!--            android:padding="5dp"-->
+        <!--            android:layout_gravity="bottom"-->
+        <!--            android:layout_marginTop="50dp"-->
+        <!--            >-->
+        <!-- Hiển thị ngày hết hạn -->
+        <TextView
+            android:id="@+id/task_duedateAt"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="25dp"
+            android:layout_marginTop="30dp"
+            android:layout_marginRight="10dp"
+            android:text="Ngày hết han"
+            android:textColor="#fff" />
+        <!--        </RelativeLayout>-->
 
         <!-- Hiển thị mô tả Task -->
         <TextView
+            android:id="@+id/task_description"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/task_description"
-            android:textColor="#fff"
-            android:text="Description: At 12AM"
             android:layout_marginLeft="25dp"
-            android:layout_marginRight="10dp"
             android:layout_marginTop="5dp"
-            />
+            android:layout_marginRight="10dp"
+            android:text="Description: At 12AM"
+            android:textColor="#fff" />
         <!-- Hiển thị ngày tạo -->
-<!--        <TextView-->
-<!--            android:layout_width="match_parent"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:id="@+id/task_createdAt"-->
-<!--            android:textColor="#fff"-->
-<!--            android:text=""-->
-<!--            android:layout_marginLeft="25dp"-->
-<!--            android:layout_marginRight="10dp"-->
-<!--            android:layout_marginTop="5dp"-->
-<!--            />-->
+        <!--        <TextView-->
+        <!--            android:layout_width="match_parent"-->
+        <!--            android:layout_height="wrap_content"-->
+        <!--            android:id="@+id/task_createdAt"-->
+        <!--            android:textColor="#fff"-->
+        <!--            android:text=""-->
+        <!--            android:layout_marginLeft="25dp"-->
+        <!--            android:layout_marginRight="10dp"-->
+        <!--            android:layout_marginTop="5dp"-->
+        <!--            />-->
         <ImageView
+            android:id="@+id/deleteBtn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@drawable/ic_delete"
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
             android:layout_marginRight="10dp"
-            android:id="@+id/deleteBtn"
             android:layout_toLeftOf="@+id/task_description"
-            />
+            android:src="@drawable/ic_delete" />
+
         <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/ic_edit"
-            android:layout_toLeftOf="@+id/deleteBtn"
-            android:layout_marginRight="10dp"
-            android:layout_centerVertical="true"
             android:id="@+id/editBtn"
-            />
-        <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@drawable/ic_done"
-            android:layout_toLeftOf="@+id/editBtn"
-            android:layout_marginRight="10dp"
             android:layout_centerVertical="true"
+            android:layout_marginRight="10dp"
+            android:layout_toLeftOf="@+id/deleteBtn"
+            android:src="@drawable/ic_edit" />
+
+        <ImageView
             android:id="@+id/doneBtn"
-            />
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="10dp"
+            android:layout_toLeftOf="@+id/editBtn"
+            android:src="@drawable/ic_done" />
     </RelativeLayout>
 </androidx.cardview.widget.CardView>
