@@ -133,5 +133,14 @@
             android:layout_marginRight="10dp"
             android:layout_toLeftOf="@+id/editBtn"
             android:src="@drawable/ic_done" />
+
+        <ImageView
+            android:id="@+id/clockBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="10dp"
+            android:layout_toLeftOf="@+id/doneBtn"
+            android:src="@drawable/ic_clock" />
     </RelativeLayout>
 </androidx.cardview.widget.CardView>

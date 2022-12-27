@@ -80,7 +80,7 @@ public class TaskListAdapter extends RecyclerView.Adapter<TaskListAdapter.MyView
         CardView accordian_title;
         TextView titleTv, descriptionTv, duedateAtTv;
         RelativeLayout accordian_body;
-        ImageView arrow, editBtn, deleteBtn, doneBtn;
+        ImageView arrow, editBtn, deleteBtn, doneBtn, clockBtn;
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
 
@@ -93,6 +93,7 @@ public class TaskListAdapter extends RecyclerView.Adapter<TaskListAdapter.MyView
             editBtn = (ImageView) itemView.findViewById(R.id.editBtn);
             deleteBtn = (ImageView) itemView.findViewById(R.id.deleteBtn);
             doneBtn = (ImageView) itemView.findViewById(R.id.doneBtn);
+            clockBtn = (ImageView) itemView.findViewById(R.id.clockBtn);
 
 
             itemView.setOnClickListener(new View.OnClickListener() {
@@ -128,6 +129,13 @@ public class TaskListAdapter extends RecyclerView.Adapter<TaskListAdapter.MyView
                 @Override
                 public void onClick(View v) {
                     clickListener.onDoneButtonClick(getAdapterPosition());
+                }
+            });
+
+            clockBtn.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    clickListener.onClockButtonClick(getAdapterPosition());
                 }
             });
         }

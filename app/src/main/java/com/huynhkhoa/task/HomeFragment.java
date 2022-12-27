@@ -1,9 +1,19 @@
 
 package com.huynhkhoa.task;
+import static android.content.Context.ALARM_SERVICE;
+import static androidx.core.content.ContextCompat.getSystemService;
+
+import android.app.AlarmManager;
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Canvas;
+import android.os.Build;
 import android.os.Bundle;
+import android.content.BroadcastReceiver;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
@@ -36,6 +46,7 @@ import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 import com.huynhkhoa.task.Adapters.TaskListAdapter;
 import com.huynhkhoa.task.Constants.Constants;
+import com.huynhkhoa.task.Notifications.BroadcastNotify;
 import com.huynhkhoa.task.Services.SharedPreferenceClass;
 import com.huynhkhoa.task.Interfaces.RecyclerViewClickListener;
 import com.huynhkhoa.task.Models.TaskModel;
@@ -67,7 +78,6 @@ public class HomeFragment extends Fragment implements RecyclerViewClickListener 
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_home, container, false);
-
         sharedPreferenceClass = new SharedPreferenceClass(getContext());
         token = sharedPreferenceClass.getValue_string("token");
 
@@ -92,6 +102,7 @@ public class HomeFragment extends Fragment implements RecyclerViewClickListener 
 
         ItemTouchHelper itemTouchHelper = new ItemTouchHelper(simpleCallback);
         itemTouchHelper.attachToRecyclerView(recyclerView);
+        createNotificationChannel();
         return view;
     }
 
@@ -570,5 +581,38 @@ public class HomeFragment extends Fragment implements RecyclerViewClickListener 
         showFinishedTaskDialog(arrayList.get(position).getId(), position);
         Toast.makeText(getActivity(), "Position "+ position, Toast.LENGTH_SHORT).show();
     }
+
+//    public static final String ALARM_SERVICE = "ALARM_SERVICE";
+    @Override
+    public void onClockButtonClick(int position) {
+        Toast.makeText(getActivity(), "Position "+ position, Toast.LENGTH_SHORT).show();
+        Intent intent = new Intent(getActivity(), BroadcastNotify.class);
+        PendingIntent pendingIntent = PendingIntent.getBroadcast(getActivity(), 0, intent, 0);
+        AlarmManager alarmManager = (AlarmManager) getActivity().getSystemService(ALARM_SERVICE);
+
+        long timeAtButtonClick = System.currentTimeMillis();
+        long tenSecondsMillis = 1000*10;
+        alarmManager.set(AlarmManager.RTC_WAKEUP, timeAtButtonClick + tenSecondsMillis,
+                pendingIntent);
+    }
+
+    /**
+     * Notifications
+     * */
+    private void createNotificationChannel() {
+        // the NotificationChannel class is new and not in the support library
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            CharSequence name = "lemubit Channel";
+            String description = "You gotta listen";
+            int importance = NotificationManager.IMPORTANCE_DEFAULT;
+            NotificationChannel channel = new NotificationChannel("lemubitNotify", name, importance);
+            channel.setDescription(description);
+            // Register the channel with the system; you can't change the importance
+            // or other notification behaviors after this
+            NotificationManager notificationManager = (NotificationManager) getActivity().getSystemService(NotificationManager.class);
+            notificationManager.createNotificationChannel(channel);
+        }
+    }
+
 }
 

@@ -287,50 +287,50 @@ public class FinishedTaskFragment extends Fragment implements RecyclerViewClickL
      * Có chức năng tắt hộp thoại
      * */
     public void showFinishedTaskDialog(final String id, final int position) {
-        final androidx.appcompat.app.AlertDialog alertDialog = new androidx.appcompat.app.AlertDialog.Builder(getActivity())
-                .setTitle("Đánh dấu Task này là chưa hoàn thành?")
-                .setPositiveButton("Có", null)
-                .setNegativeButton("Không", null)
-                .create();
-
-        alertDialog.setOnShowListener(new DialogInterface.OnShowListener() {
-            @Override
-            public void onShow(DialogInterface dialog) {
-                Button button = ((androidx.appcompat.app.AlertDialog)alertDialog).getButton(androidx.appcompat.app.AlertDialog.BUTTON_POSITIVE);
-                button.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        updateToUnFinishTask(id, position);
-                        alertDialog.dismiss();
-                    }
-                });
-            }
-        });
-
-        alertDialog.show();
-//        final AlertDialog dialog = new AlertDialog.Builder(getActivity())
+//        final androidx.appcompat.app.AlertDialog alertDialog = new androidx.appcompat.app.AlertDialog.Builder(getActivity())
 //                .setTitle("Đánh dấu Task này là chưa hoàn thành?")
 //                .setPositiveButton("Có", null)
 //                .setNegativeButton("Không", null)
 //                .create();
 //
-//
-//        dialog.setOnShowListener(new DialogInterface.OnShowListener() {
+//        alertDialog.setOnShowListener(new DialogInterface.OnShowListener() {
 //            @Override
-//            public void onShow(DialogInterface dialogInterface) {
-//                Button button = ((AlertDialog) dialog).getButton(AlertDialog.BUTTON_POSITIVE);
-//
+//            public void onShow(DialogInterface dialog) {
+//                Button button = ((androidx.appcompat.app.AlertDialog)alertDialog).getButton(androidx.appcompat.app.AlertDialog.BUTTON_POSITIVE);
 //                button.setOnClickListener(new View.OnClickListener() {
 //                    @Override
 //                    public void onClick(View v) {
-//                        updateToUnFinishTask(id, position);
-//                        dialog.dismiss();
+//                        updateToFinishTask(id, position);
+//                        alertDialog.dismiss();
 //                    }
 //                });
 //            }
 //        });
 //
-//        dialog.show();
+//        alertDialog.show();
+        final AlertDialog dialog = new AlertDialog.Builder(getActivity())
+                .setTitle("Đánh dấu Task này là chưa hoàn thành?")
+                .setPositiveButton("Có", null)
+                .setNegativeButton("Không", null)
+                .create();
+
+
+        dialog.setOnShowListener(new DialogInterface.OnShowListener() {
+            @Override
+            public void onShow(DialogInterface dialogInterface) {
+                Button button = ((AlertDialog) dialog).getButton(AlertDialog.BUTTON_POSITIVE);
+
+                button.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        updateToUnFinishTask(id, position);
+                        dialog.dismiss();
+                    }
+                });
+            }
+        });
+
+        dialog.show();
     }
 
     @Override
@@ -358,5 +358,10 @@ public class FinishedTaskFragment extends Fragment implements RecyclerViewClickL
     public void onDoneButtonClick(int position) {
         Toast.makeText(getActivity(), "Position "+ position, Toast.LENGTH_SHORT).show();
         showFinishedTaskDialog(arrayList.get(position).getId(), position);
+    }
+
+    @Override
+    public void onClockButtonClick(int position) {
+
     }
 }
