@@ -5,11 +5,12 @@
     android:id="@+id/nav_header_main"
     android:background="@drawable/background_night"
     >
+
     <ImageView
         android:layout_width="match_parent"
         android:layout_height="200dp"
-        android:src="@drawable/img_shadow"
-        />
+        android:src="@drawable/img_shadow" />
+
     <de.hdodenhof.circleimageview.CircleImageView
         android:layout_width="80dp"
         android:layout_height="80dp"
@@ -43,5 +44,32 @@
         android:textStyle="bold"
         android:id="@+id/user_email"
         />
+
+    <TextView
+        android:id="@+id/user_phone"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/user_email"
+        android:layout_alignParentTop="true"
+        android:layout_marginLeft="191dp"
+        android:layout_marginTop="141dp"
+        android:text="User phone"
+        android:textColor="@color/white"
+        android:textSize="12sp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/user_profile"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="191dp"
+        android:layout_marginLeft="18dp"
+        android:layout_marginBottom="21dp"
+        android:text="User profile"
+        android:textColor="@color/white"
+        android:textSize="12sp"
+        android:textStyle="bold" />
 
 </RelativeLayout>

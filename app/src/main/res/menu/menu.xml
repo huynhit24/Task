@@ -13,6 +13,10 @@
             android:id="@+id/action_finished_task"
             />
         <item
+            android:title="Cập nhật tài khoản"
+            android:id="@+id/action_update_userinfo"
+            />
+        <item
             android:title="Đăng xuất"
             android:id="@+id/action_logout"
             />
