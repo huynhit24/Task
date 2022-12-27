@@ -84,5 +84,13 @@
             android:layout_toLeftOf="@+id/task_description"
             />
 
+        <ImageView
+            android:id="@+id/undoBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="10dp"
+            android:layout_toLeftOf="@+id/deleteBtn"
+            android:src="@drawable/ic_done" />
     </RelativeLayout>
 </androidx.cardview.widget.CardView>

@@ -81,7 +81,7 @@ public class FinishedTaskAdapter extends RecyclerView.Adapter<FinishedTaskAdapte
         CardView accordian_title;
         TextView titleTv, descriptionTv;
         RelativeLayout accordian_body;
-        ImageView arrow, deleteBtn;
+        ImageView arrow, deleteBtn, undoBtn;
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
 
@@ -91,13 +91,20 @@ public class FinishedTaskAdapter extends RecyclerView.Adapter<FinishedTaskAdapte
             accordian_body = (RelativeLayout) itemView.findViewById(R.id.accordian_body);
             arrow = (ImageView) itemView.findViewById(R.id.arrow);
             deleteBtn = (ImageView) itemView.findViewById(R.id.deleteBtn);
-
+            undoBtn = (ImageView) itemView.findViewById(R.id.undoBtn);
 
 
             deleteBtn.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     clickListener.onDeleteButtonClick(getAdapterPosition());
+                }
+            });
+
+            undoBtn.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    clickListener.onDoneButtonClick(getAdapterPosition());
                 }
             });
         }

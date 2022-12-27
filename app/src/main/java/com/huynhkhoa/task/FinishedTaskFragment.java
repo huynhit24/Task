@@ -237,6 +237,101 @@ public class FinishedTaskFragment extends Fragment implements RecyclerViewClickL
         dialog.show();
     }
 
+    /**
+     * Cập nhật trạng thái của 1 Task là chưa hoàn thành
+     * Gọi API Get để thay đổi field finished thành false
+     * */
+    private void updateToUnFinishTask(final String id,final int position) {
+        String url = Constants.BASE_URL + "/api/task/"+id;
+        HashMap<String, String> body = new HashMap<>();
+        body.put("finished", "false");
+
+        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.PUT, url, new JSONObject(body),
+                new Response.Listener<JSONObject>() {
+                    @Override
+                    public void onResponse(JSONObject response) {
+                        try {
+                            if(response.getBoolean("success")) {
+                                arrayList.remove(position);
+                                getTasks();
+
+                                taskListAdapter.notifyItemRemoved(position);
+                                Toast.makeText(getActivity(), response.getString("msg"), Toast.LENGTH_SHORT).show();
+                            }
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Toast.makeText(getActivity(), error.toString(), Toast.LENGTH_SHORT).show();
+            }
+        }) {
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                Map<String, String> params = new HashMap<>();
+                params.put("Content-Type", "application/json");
+                return params;
+            }
+        };
+
+        jsonObjectRequest.setRetryPolicy(new DefaultRetryPolicy(10000, DefaultRetryPolicy.DEFAULT_MAX_RETRIES, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
+
+        RequestQueue requestQueue = Volley.newRequestQueue(getContext());
+        requestQueue.add(jsonObjectRequest);
+    }
+
+    /**
+     * Show hộp thoại đánh dấu 1 Task là đã hoàn thành
+     * Có chức năng tắt hộp thoại
+     * */
+    public void showFinishedTaskDialog(final String id, final int position) {
+        final androidx.appcompat.app.AlertDialog alertDialog = new androidx.appcompat.app.AlertDialog.Builder(getActivity())
+                .setTitle("Đánh dấu Task này là chưa hoàn thành?")
+                .setPositiveButton("Có", null)
+                .setNegativeButton("Không", null)
+                .create();
+
+        alertDialog.setOnShowListener(new DialogInterface.OnShowListener() {
+            @Override
+            public void onShow(DialogInterface dialog) {
+                Button button = ((androidx.appcompat.app.AlertDialog)alertDialog).getButton(androidx.appcompat.app.AlertDialog.BUTTON_POSITIVE);
+                button.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        updateToUnFinishTask(id, position);
+                        alertDialog.dismiss();
+                    }
+                });
+            }
+        });
+
+        alertDialog.show();
+//        final AlertDialog dialog = new AlertDialog.Builder(getActivity())
+//                .setTitle("Đánh dấu Task này là chưa hoàn thành?")
+//                .setPositiveButton("Có", null)
+//                .setNegativeButton("Không", null)
+//                .create();
+//
+//
+//        dialog.setOnShowListener(new DialogInterface.OnShowListener() {
+//            @Override
+//            public void onShow(DialogInterface dialogInterface) {
+//                Button button = ((AlertDialog) dialog).getButton(AlertDialog.BUTTON_POSITIVE);
+//
+//                button.setOnClickListener(new View.OnClickListener() {
+//                    @Override
+//                    public void onClick(View v) {
+//                        updateToUnFinishTask(id, position);
+//                        dialog.dismiss();
+//                    }
+//                });
+//            }
+//        });
+//
+//        dialog.show();
+    }
 
     @Override
     public void onItemClick(int position) {
@@ -261,6 +356,7 @@ public class FinishedTaskFragment extends Fragment implements RecyclerViewClickL
 
     @Override
     public void onDoneButtonClick(int position) {
-
+        Toast.makeText(getActivity(), "Position "+ position, Toast.LENGTH_SHORT).show();
+        showFinishedTaskDialog(arrayList.get(position).getId(), position);
     }
 }
