@@ -103,7 +103,7 @@ public class LoginActivity extends AppCompatActivity {
                         String token = response.getString("token");
 
                         sharedPreferenceClass.setValue_string("token", token);
-                        Toast.makeText(LoginActivity.this, token, Toast.LENGTH_SHORT).show();
+//                        Toast.makeText(LoginActivity.this, token, Toast.LENGTH_SHORT).show();
 
                         startActivity(new Intent(LoginActivity.this, MainActivity.class));
                     }

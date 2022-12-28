@@ -135,7 +135,8 @@ public class TaskListAdapter extends RecyclerView.Adapter<TaskListAdapter.MyView
             clockBtn.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    clickListener.onClockButtonClick(getAdapterPosition());
+                    clickListener.onClockButtonClick(getAdapterPosition(),titleTv.getText().toString(),
+                            descriptionTv.getText().toString());
                 }
             });
         }

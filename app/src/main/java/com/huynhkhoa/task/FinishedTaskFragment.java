@@ -359,9 +359,8 @@ public class FinishedTaskFragment extends Fragment implements RecyclerViewClickL
         Toast.makeText(getActivity(), "Position "+ position, Toast.LENGTH_SHORT).show();
         showFinishedTaskDialog(arrayList.get(position).getId(), position);
     }
-
     @Override
-    public void onClockButtonClick(int position) {
+    public void onClockButtonClick(int position, String title, String description) {
 
     }
 }

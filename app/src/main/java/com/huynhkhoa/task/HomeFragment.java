@@ -584,9 +584,16 @@ public class HomeFragment extends Fragment implements RecyclerViewClickListener 
 
 //    public static final String ALARM_SERVICE = "ALARM_SERVICE";
     @Override
-    public void onClockButtonClick(int position) {
+    public void onClockButtonClick(int position, String title, String description) {
         Toast.makeText(getActivity(), "Position "+ position, Toast.LENGTH_SHORT).show();
         Intent intent = new Intent(getActivity(), BroadcastNotify.class);
+
+        //gửi data qua BroadcastNotify
+//        final TextView title_field = (TextView) getActivity().findViewById(R.id.title);
+//        final TextView description_field = (TextView) getActivity().findViewById(R.id.description);
+        intent.putExtra("task_title", title);
+        intent.putExtra("task_description", description);
+
         PendingIntent pendingIntent = PendingIntent.getBroadcast(getActivity(), 0, intent, 0);
         AlarmManager alarmManager = (AlarmManager) getActivity().getSystemService(ALARM_SERVICE);
 
@@ -602,13 +609,12 @@ public class HomeFragment extends Fragment implements RecyclerViewClickListener 
     private void createNotificationChannel() {
         // the NotificationChannel class is new and not in the support library
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            CharSequence name = "lemubit Channel";
+            CharSequence name = "Task Notifications";
             String description = "You gotta listen";
             int importance = NotificationManager.IMPORTANCE_DEFAULT;
-            NotificationChannel channel = new NotificationChannel("lemubitNotify", name, importance);
+            NotificationChannel channel = new NotificationChannel("TaskNotify", name, importance);
             channel.setDescription(description);
-            // Register the channel with the system; you can't change the importance
-            // or other notification behaviors after this
+
             NotificationManager notificationManager = (NotificationManager) getActivity().getSystemService(NotificationManager.class);
             notificationManager.createNotificationChannel(channel);
         }

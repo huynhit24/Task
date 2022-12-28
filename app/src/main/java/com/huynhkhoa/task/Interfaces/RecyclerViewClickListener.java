@@ -10,5 +10,5 @@ public interface RecyclerViewClickListener {
     void onEditButtonClick(int position);
     void onDeleteButtonClick(int position);
     void onDoneButtonClick(int position);
-    void onClockButtonClick(int position);
+    void onClockButtonClick(int position, String title, String description);
 }
