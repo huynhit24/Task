@@ -205,7 +205,7 @@ public class MainActivity extends AppCompatActivity {
         return true;
     }
 
-    Boolean isCheck = false; // true dùng descsort, false dùng ascsort
+    Boolean isCheck = true; // true dùng descsort, false dùng ascsort
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
 
@@ -231,6 +231,10 @@ public class MainActivity extends AppCompatActivity {
                     getSupportFragmentManager().beginTransaction().replace(R.id.content, new HomeFragment("ascsort")).commit();
                     isCheck = true;
                 }
+                return true;
+
+            case R.id.search_task:
+                showSearchTasksDialog();
                 return true;
 
         }
@@ -328,5 +332,46 @@ public class MainActivity extends AppCompatActivity {
 
     public void onEditButtonClick(String uid) {
         showUpdateDialog(uid, user_phone.getText().toString(), user_profile.getText().toString());
+    }
+
+    /**
+     * Tìm kiếm Task gần đúng
+     * */
+
+    /**
+     * Show hộp thoại cập nhật Userinfo qua Id
+     * Có chức năng tắt hộp thoại cập nhật
+     * */
+    public void showSearchTasksDialog()  {
+        LayoutInflater inflater = getLayoutInflater();
+        View alertLayout = inflater.inflate(R.layout.custom_dialog_layout_search_task, null);
+
+        final EditText search_field = alertLayout.findViewById(R.id.txtSearch);
+        String txtSearch = search_field.getText().toString();
+        search_field.setText(txtSearch);
+
+        final AlertDialog alertDialog = new AlertDialog.Builder(this)
+                .setView(alertLayout)
+                .setTitle("Tìm kiếm Task trong danh sách")
+                .setPositiveButton("Tìm kiếm", null)
+                .setNegativeButton("Hủy bỏ", null)
+                .create();
+
+        alertDialog.setOnShowListener(new DialogInterface.OnShowListener() {
+            @Override
+            public void onShow(DialogInterface dialog) {
+                Button button = ((AlertDialog)alertDialog).getButton(AlertDialog.BUTTON_POSITIVE);
+                button.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        String txtSearch = search_field.getText().toString();
+                        getSupportFragmentManager().beginTransaction().replace(R.id.content, new HomeFragment(txtSearch)).commit();
+                        alertDialog.dismiss();
+                    }
+                });
+            }
+        });
+
+        alertDialog.show();
     }
 }

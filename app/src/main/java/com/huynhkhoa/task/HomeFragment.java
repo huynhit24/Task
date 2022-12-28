@@ -57,6 +57,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.UnsupportedEncodingException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
@@ -107,7 +108,13 @@ public class HomeFragment extends Fragment implements RecyclerViewClickListener 
         if(typeSort == "ascsort" || typeSort == "descsort") {
             getSortedTasks(typeSort);
         }else{
-            getTasks();
+            if(typeSort == "" || typeSort == null) {
+//                getTasks(); // thay the bang danh sach sap xep
+                getSortedTasks("descsort");
+            }else {
+                getTasksByTextSearch(typeSort);
+            }
+
         }
 
 
@@ -147,6 +154,7 @@ public class HomeFragment extends Fragment implements RecyclerViewClickListener 
 
         final EditText title_field = alertLayout.findViewById(R.id.title);
         final EditText description_field = alertLayout.findViewById(R.id.description);
+        final EditText duedateAt_field = alertLayout.findViewById(R.id.duedateAt);
 
         final AlertDialog dialog = new AlertDialog.Builder(getActivity())
                 .setView(alertLayout)
@@ -165,8 +173,9 @@ public class HomeFragment extends Fragment implements RecyclerViewClickListener 
                     public void onClick(View v) {
                         String title = title_field.getText().toString();
                         String description = description_field.getText().toString();
+                        String duedateAt = duedateAt_field.getText().toString();
                         if(!TextUtils.isEmpty(title)) {
-                            addTask(title, description);
+                            addTask(title, description, duedateAt);
                             dialog.dismiss();
                         } else {
                             Toast.makeText(getActivity(), "Nhập tiêu đề Task ...", Toast.LENGTH_SHORT).show();
@@ -189,6 +198,7 @@ public class HomeFragment extends Fragment implements RecyclerViewClickListener 
 
         final EditText title_field = alertLayout.findViewById(R.id.title);
         final EditText description_field = alertLayout.findViewById(R.id.description);
+        final EditText duedateAt_field = alertLayout.findViewById(R.id.duedateAt);
 
         title_field.setText(title);
         description_field.setText(description);
@@ -209,8 +219,8 @@ public class HomeFragment extends Fragment implements RecyclerViewClickListener 
                     public void onClick(View v) {
                         String title = title_field.getText().toString();
                         String description = description_field.getText().toString();
-
-                        updateTask(id, title, description);
+                        String duedateAt = duedateAt_field.getText().toString();
+                        updateTask(id, title, description, duedateAt);
                         alertDialog.dismiss();
                     }
                 });
@@ -303,7 +313,6 @@ public class HomeFragment extends Fragment implements RecyclerViewClickListener 
                             empty_tv.setVisibility(View.GONE);
                             for(int i = 0; i < jsonArray.length(); i ++) {
                                 JSONObject jsonObject = jsonArray.getJSONObject(i);
-
                                 TaskModel taskModel = new TaskModel(
                                         jsonObject.getString("_id"),
                                         jsonObject.getString("title"),
@@ -477,6 +486,103 @@ public class HomeFragment extends Fragment implements RecyclerViewClickListener 
         requestQueue.add(jsonObjectRequest);
     }
 
+    /**
+     * Lấy ra tất cả danh sách Tasks có trong database có chừa từ cần tìm
+     * */
+    public void getTasksByTextSearch(String textSearch) {
+        arrayList = new ArrayList<>();
+        progressBar.setVisibility(View.VISIBLE);
+        String url = Constants.BASE_URL + "/api/task/search?title=" + textSearch;
+
+        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET,
+                url, null, new Response.Listener<JSONObject>() {
+            @Override
+            public void onResponse(JSONObject response) {
+                try {
+                    if(response.getBoolean("success")) {
+                        JSONArray jsonArray = response.getJSONArray("tasks");
+
+                        if(jsonArray.length() == 0) {
+                            empty_tv.setVisibility(View.VISIBLE);
+                        } else {
+                            empty_tv.setVisibility(View.GONE);
+                            for(int i = 0; i < jsonArray.length(); i ++) {
+                                JSONObject jsonObject = jsonArray.getJSONObject(i);
+
+                                TaskModel taskModel = new TaskModel(
+                                        jsonObject.getString("_id"),
+                                        jsonObject.getString("title"),
+                                        jsonObject.getString("description"),
+                                        jsonObject.getString("duedateAt")
+                                );
+                                arrayList.add(taskModel);
+                            }
+
+                            taskListAdapter = new TaskListAdapter(getActivity(), arrayList, HomeFragment.this);
+                            recyclerView.setAdapter(taskListAdapter);
+                        }
+
+                    }
+                    progressBar.setVisibility(View.GONE);
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                    progressBar.setVisibility(View.GONE);
+                }
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+
+
+                NetworkResponse response = error.networkResponse;
+
+                if (error == null || error.networkResponse == null) {
+                    return;
+                }
+
+                String body;
+
+//                final String statusCode = String.valueOf(error.networkResponse.statusCode);
+
+                try {
+                    body = new String(error.networkResponse.data,"UTF-8");
+                    JSONObject errorObject = new JSONObject(body);
+
+
+                    if(errorObject.getString("msg").equals("Token not valid")) {
+                        sharedPreferenceClass.clear();
+                        startActivity(new Intent(getActivity(), LoginActivity.class));
+                        Toast.makeText(getActivity(), "Session expired", Toast.LENGTH_SHORT).show();
+                    }
+
+                    Toast.makeText(getActivity(), errorObject.getString("msg") , Toast.LENGTH_SHORT).show();
+                } catch (UnsupportedEncodingException | JSONException e) {
+                    // exception
+                }
+
+
+                progressBar.setVisibility(View.GONE);
+            }
+        }) {
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                HashMap<String, String> headers = new HashMap<>();
+                headers.put("Content-Type", "application/json");
+                headers.put("Authorization", token);
+                return headers;
+            }
+        };
+
+        // set retry policy
+        int socketTime = 3000;
+        RetryPolicy policy = new DefaultRetryPolicy(socketTime,
+                DefaultRetryPolicy.DEFAULT_MAX_RETRIES, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT);
+        jsonObjectRequest.setRetryPolicy(policy);
+
+        // request add
+        RequestQueue requestQueue = Volley.newRequestQueue(getContext());
+        requestQueue.add(jsonObjectRequest);
+    }
 
     /**
      * Xóa 1 Task theo Id
@@ -516,12 +622,13 @@ public class HomeFragment extends Fragment implements RecyclerViewClickListener 
      * Thêm 1 Task mới vào danh sách
      * Gọi API Post để thêm Task
      * */
-    private void addTask(String title, String description) {
+    private void addTask(String title, String description, String duedateAt) {
         String url = Constants.BASE_URL + "/api/task";
 
         HashMap<String, String> body = new HashMap<>();
         body.put("title", title);
         body.put("description", description);
+        body.put("duedateAt", duedateAt);
 
         JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.POST,
                 url, new JSONObject(body), new Response.Listener<JSONObject>() {
@@ -576,11 +683,12 @@ public class HomeFragment extends Fragment implements RecyclerViewClickListener 
      * Cập nhật 1 Task theo Id
      * Gọi API Put để cập nhật Task
      * */
-    private  void  updateTask(String id, String title, String description) {
+    private  void  updateTask(String id, String title, String description, String duedateAt) {
         String url = Constants.BASE_URL + "/api/task/"+id;
         HashMap<String, String> body = new HashMap<>();
         body.put("title", title);
         body.put("description", description);
+        body.put("duedateAt", duedateAt);
 
         JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.PUT, url, new JSONObject(body),
                 new Response.Listener<JSONObject>() {

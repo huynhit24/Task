@@ -29,4 +29,17 @@
         android:paddingRight="15dp"
         android:singleLine="true"
         />
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/duedateAt"
+        android:hint="Ngày đến hạn"
+        android:layout_marginTop="20dp"
+        android:paddingTop="20dp"
+        android:paddingBottom="20dp"
+        android:paddingLeft="15dp"
+        android:paddingRight="15dp"
+        android:singleLine="true"
+        />
 </LinearLayout>
