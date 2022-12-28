@@ -205,23 +205,32 @@ public class MainActivity extends AppCompatActivity {
         return true;
     }
 
+    Boolean isCheck = false; // true dùng descsort, false dùng ascsort
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
 
         switch (item.getItemId()) {
+
             case R.id.action_share:
                 Intent sharingIntent = new Intent(Intent.ACTION_SEND);
                 sharingIntent.setType("text/plain");
-
-                String shareBody = "Hãy thử ứng dụng này để làm, nó sử dụng tính năng lưu vĩnh viễn nhiệm vụ của bạn.";
-
+                String shareBody = "Share App";
                 sharingIntent.putExtra(Intent.EXTRA_TEXT, shareBody);
                 startActivity(Intent.createChooser(sharingIntent, "Chia sẻ qua"));
-
                 return true;
 
             case R.id.refresh_menu:
                 getSupportFragmentManager().beginTransaction().replace(R.id.content, new HomeFragment()).commit();
+                return true;
+
+            case R.id.sort_task:
+                if(isCheck == true){
+                    getSupportFragmentManager().beginTransaction().replace(R.id.content, new HomeFragment("descsort")).commit();
+                    isCheck = false;
+                }else{
+                    getSupportFragmentManager().beginTransaction().replace(R.id.content, new HomeFragment("ascsort")).commit();
+                    isCheck = true;
+                }
                 return true;
 
         }

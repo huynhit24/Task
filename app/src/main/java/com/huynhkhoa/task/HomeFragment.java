@@ -70,8 +70,15 @@ public class HomeFragment extends Fragment implements RecyclerViewClickListener 
     TextView empty_tv;
     ProgressBar progressBar;
     ArrayList<TaskModel> arrayList;
+    String typeSort;
 
     public HomeFragment() {
+        // bổ trống
+    }
+
+    public HomeFragment(String typeSort) {
+        this.typeSort = typeSort;// khởi tạo giá trị sắp xếp là ascsort hoặc descsort
+//        getSortedTasks(typeSort);
     }
 
     @Override
@@ -97,8 +104,12 @@ public class HomeFragment extends Fragment implements RecyclerViewClickListener 
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         recyclerView.setHasFixedSize(true);
 
+        if(typeSort == "ascsort" || typeSort == "descsort") {
+            getSortedTasks(typeSort);
+        }else{
+            getTasks();
+        }
 
-        getTasks();
 
         ItemTouchHelper itemTouchHelper = new ItemTouchHelper(simpleCallback);
         itemTouchHelper.attachToRecyclerView(recyclerView);
@@ -368,6 +379,103 @@ public class HomeFragment extends Fragment implements RecyclerViewClickListener 
         requestQueue.add(jsonObjectRequest);
     }
 
+    /**
+     * Lấy ra tất cả danh sách Tasks có trong database có sắp xếp
+     * */
+    public void getSortedTasks(String typeSort) {
+        arrayList = new ArrayList<>();
+        progressBar.setVisibility(View.VISIBLE);
+        String url = Constants.BASE_URL + "/api/task/" + typeSort;
+
+        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET,
+                url, null, new Response.Listener<JSONObject>() {
+            @Override
+            public void onResponse(JSONObject response) {
+                try {
+                    if(response.getBoolean("success")) {
+                        JSONArray jsonArray = response.getJSONArray("tasks");
+
+                        if(jsonArray.length() == 0) {
+                            empty_tv.setVisibility(View.VISIBLE);
+                        } else {
+                            empty_tv.setVisibility(View.GONE);
+                            for(int i = 0; i < jsonArray.length(); i ++) {
+                                JSONObject jsonObject = jsonArray.getJSONObject(i);
+
+                                TaskModel taskModel = new TaskModel(
+                                        jsonObject.getString("_id"),
+                                        jsonObject.getString("title"),
+                                        jsonObject.getString("description"),
+                                        jsonObject.getString("duedateAt")
+                                );
+                                arrayList.add(taskModel);
+                            }
+
+                            taskListAdapter = new TaskListAdapter(getActivity(), arrayList, HomeFragment.this);
+                            recyclerView.setAdapter(taskListAdapter);
+                        }
+
+                    }
+                    progressBar.setVisibility(View.GONE);
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                    progressBar.setVisibility(View.GONE);
+                }
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+
+
+                NetworkResponse response = error.networkResponse;
+
+                if (error == null || error.networkResponse == null) {
+                    return;
+                }
+
+                String body;
+
+//                final String statusCode = String.valueOf(error.networkResponse.statusCode);
+
+                try {
+                    body = new String(error.networkResponse.data,"UTF-8");
+                    JSONObject errorObject = new JSONObject(body);
+
+
+                    if(errorObject.getString("msg").equals("Token not valid")) {
+                        sharedPreferenceClass.clear();
+                        startActivity(new Intent(getActivity(), LoginActivity.class));
+                        Toast.makeText(getActivity(), "Session expired", Toast.LENGTH_SHORT).show();
+                    }
+
+                    Toast.makeText(getActivity(), errorObject.getString("msg") , Toast.LENGTH_SHORT).show();
+                } catch (UnsupportedEncodingException | JSONException e) {
+                    // exception
+                }
+
+
+                progressBar.setVisibility(View.GONE);
+            }
+        }) {
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                HashMap<String, String> headers = new HashMap<>();
+                headers.put("Content-Type", "application/json");
+                headers.put("Authorization", token);
+                return headers;
+            }
+        };
+
+        // set retry policy
+        int socketTime = 3000;
+        RetryPolicy policy = new DefaultRetryPolicy(socketTime,
+                DefaultRetryPolicy.DEFAULT_MAX_RETRIES, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT);
+        jsonObjectRequest.setRetryPolicy(policy);
+
+        // request add
+        RequestQueue requestQueue = Volley.newRequestQueue(getContext());
+        requestQueue.add(jsonObjectRequest);
+    }
 
 
     /**
